@@ -6,6 +6,8 @@ import * as CodePipeline from 'aws-cdk-lib/aws-codepipeline';
 import * as CodePipelineAction from 'aws-cdk-lib/aws-codepipeline-actions'
 
 export class CloudInfraStack extends cdk.Stack {
+  s3WebsiteBucket: s3.Bucket;
+
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
@@ -35,7 +37,7 @@ export class CloudInfraStack extends cdk.Stack {
           repo: "kloudpod-web-ui",
           branch: "main",
           output: outputSource,
-          connectionArn: "<<REPLACE-WITH-YOUR-CODESTAR-ARN>>",
+          connectionArn: "arn:aws:codestar-connections:us-east-1:853232536111:connection/832612df-aa20-4957-9d21-d8e19178003c",
         })
       ]
     });
@@ -70,5 +72,7 @@ export class CloudInfraStack extends cdk.Stack {
         })
       ]
     });
+
+    this.s3WebsiteBucket = websiteBucket;
   }
 }
